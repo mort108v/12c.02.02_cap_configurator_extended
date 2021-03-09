@@ -1,98 +1,112 @@
 :root {
-  font-family: 'Quicksand', sans-serif;
+    font-family: 'Quicksand', sans-serif;
+}
+
+body {
+    width: 70vw;
+    margin: 0 auto;
 }
 
 #configurator {
-  display: grid;
-  grid-template-areas: "product options"
-                       "features features";
-  gap: 1em;
+    display: grid;
+    grid-template-areas: "product options" "features features";
+    gap: 1em;
 }
 
 #product-preview {
-  grid-area: product;
-  box-shadow: 3px 3px 8px #ddd;
-  border-radius: 1em;
-  position: relative;
-  transition: opacity ease-in .5s;
+    grid-area: product;
+    box-shadow: 3px 3px 8px #ddd;
+    border-radius: 1em;
+    position: relative;
+    transition: opacity ease-in .5s;
 }
 
 #product-preview img {
-  position: absolute;
-  width: 100%;
-  height: auto;
-  top: 0;
-  left: 0;
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 0;
+    left: 0;
 }
 
 #product-preview .hide {
-  opacity: 0;
+    opacity: 0;
 }
 
 #product-preview img.basic {
-  position: relative;
+    position: relative;
 }
 
 #options {
-  grid-area: options;
-  box-shadow: 3px 3px 8px #ddd;
-  border-radius: 1em;
-  padding: 1em;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+    grid-area: options;
+    box-shadow: 3px 3px 8px #ddd;
+    border-radius: 1em;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 #options .option {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1em;
-  color: #aaa;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1em;
+    color: #aaa;
 }
 
 #options .option:hover {
-  background-color: #ddd;
-  cursor: pointer;
+    background-color: #ddd;
+    cursor: pointer;
 }
 
 #options .option.chosen {
-  text-decoration: underline;
-  color: #000;
+    text-decoration: underline;
+    color: #000;
 }
 
 #options .option img {
-  width: 7vw;
-  height: auto;
+    width: 7vw;
+    height: auto;
 }
 
 #options .option figcaption {
-  font-size: 20px;
+    font-size: 20px;
 }
 
 #selected {
-  grid-area: features;
+    grid-area: features;
 }
 
 #selected ul {
-  list-style-type: none;
+    list-style-type: none;
 }
 
 #selected ul li {
-  display: inline-block;
+    display: inline-block;
 }
 
 #selected ul li img {
-  width: 3em;
+    width: 3em;
 }
+
 
 /* Animation classes */
 
 .animate-feature-in {
-  /* TODO: Create animation for adding a feature */
-  
+    /* : Create animation for adding a feature */
+    animation: animate 1s;
+}
+
+@keyframes animate {
+    0% {
+        transform: translate(var(--diffX), var(--diffY));
+    }
+    100% {
+        transform: translate(0, 0);
+    }
 }
 
 .animate-feature-out {
-  /* TODO: Create animation for removing a feature */
+    /* TODO: Create animation for removing a feature */
 }

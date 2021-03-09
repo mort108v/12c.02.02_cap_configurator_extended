@@ -18,7 +18,7 @@ function start() {
 }
 
 function toggleOption(event) {
-    console.log(event);
+    console.log(" - Toggle clicked");
     const target = event.currentTarget;
     const feature = target.dataset.feature;
 
@@ -37,10 +37,32 @@ function toggleOption(event) {
         productDataFeatures.forEach(productDataFeature => {
             productDataFeature.classList.remove("hide");
         });
+        // - create featureElement and append to #selected ul
+        const featureElement = createFeatureElement(feature);
+        document.querySelector("#selected ul").append(featureElement);
+        // - create FLIP-animation to animate featureElement from img in target, to
+        //   its intended position. Do it with normal animation or transition class!
+        // 1. The first: Find the start position
+        const start = target.getBoundingClientRect();
+        // 2. Second: Find end position
+        const end = featureElement.getBoundingClientRect();
+        // 3. Third: Translate element to start pos
+        const diffX = start.x - end.x;
+        const diffY = start.y - end.y;
+
+        featureElement.style.setProperty("--diffX", diffX + "px");
+        featureElement.style.setProperty("--diffY", diffY + "px");
+
+        // featureElement.style.transform = `translate(${diffX}px, (${diffY}px)`
+
+        // Make it recalculate layout frames
+        featureElement.offsetHeight;
+
+        // 4. Fourth: Animate element to translate(0,0);
+        // featureElement.style.transition = "transform 1s";
+        // featureElement.style.transform = "translate(0,0)";
+        featureElement.classList.add("animate-feature-in");
     }
-    // - create featureElement and append to #selected ul
-    // - create FLIP-animation to animate featureElement from img in target, to
-    //   its intended position. Do it with normal animation or transition class!
 
     // Else - if the feature (became) turned off:
     // - no longer mark target as chosen
