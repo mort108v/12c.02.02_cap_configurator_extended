@@ -80,7 +80,7 @@ function toggleOption(event) {
         // featureElement.style.transition = "transform 1s";
         // featureElement.style.transform = "translate(0,0)";
         featureElement.classList.add("animate-feature-in");
-        featureElement.addEventListener("transitionend", elementTransitionEnd);
+
     }
 
     // Else - if the feature (became) turned off:

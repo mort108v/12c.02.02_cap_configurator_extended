@@ -95,7 +95,7 @@ body {
 
 .animate-feature-in {
     /* : Create animation for adding a feature */
-    animation: animate-in 1s;
+    animation: animate-in 1.2s;
 }
 
 @keyframes animate-in {
@@ -109,7 +109,7 @@ body {
 
 .animate-feature-out {
     /* TODO: Create animation for removing a feature */
-    animation: animate-out 1.5s ease-in-out;
+    animation: animate-out 1.2s ease-in-out;
 }
 
 @keyframes animate-out {
