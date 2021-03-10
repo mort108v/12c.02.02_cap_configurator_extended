@@ -22,26 +22,44 @@ function toggleOption(event) {
     const target = event.currentTarget;
     const feature = target.dataset.feature;
 
-    // TODO: Toggle feature in "model"
+    // : Toggle feature in "model"
     features[feature] = !features[feature];
 
+    //  Is feature already in selction area?
+    const featureElementIsActive = document.querySelector(`#selected ul li[data-feature=${feature}]`);
+    console.log(featureElementIsActive);
 
+    // if (featureElementIsActive) {
+    //     target.classList.remove("chosen");
+    //     featureElementIsActive.classList.remove("animate-feature-in");
+    //     featureElementIsActive.offsetHeight;
+    //     featureElementIsActive.classList.add("animate-feature-out");
+
+    //     const activefeatureElements = document.querySelectorAll(`img[data-feature=${feature}]`);
+    //     activefeatureElements.forEach(activefeatureElement => {
+    //         activefeatureElement.classList.add("hide");
+    //     });
+
+    //     featureElementIsActive.removeEventListener("transitionend", elementTransitionEnd);
+    // }
     // If feature is (now) turned on:
     if (features[feature]) {
-        console.log("Add chosen");
+        console.log(`Feature ${feature} is turned on!`);
+
         // - mark target as chosen (add class "chosen")
         target.classList.add("chosen");
+        console.log(target, " is chosen");
         // - un-hide the feature-layer(s) in the #product-preview;
-        const productDataFeatures = document.querySelectorAll(`img[data-feature=${feature}]`);
+        const featureElements = document.querySelectorAll(`img[data-feature=${feature}]`);
 
-        productDataFeatures.forEach(productDataFeature => {
-            productDataFeature.classList.remove("hide");
+        featureElements.forEach(featureElement => {
+            featureElement.classList.remove("hide");
         });
         // - create featureElement and append to #selected ul
         const featureElement = createFeatureElement(feature);
         document.querySelector("#selected ul").append(featureElement);
-        // - create FLIP-animation to animate featureElement from img in target, to
-        //   its intended position. Do it with normal animation or transition class!
+        // - create FLIP-animation to animate featureElement from img in target, to its intended position. Do it with normal animation or transition class!
+
         // 1. The first: Find the start position
         const start = target.getBoundingClientRect();
         // 2. Second: Find end position
@@ -62,28 +80,35 @@ function toggleOption(event) {
         // featureElement.style.transition = "transform 1s";
         // featureElement.style.transform = "translate(0,0)";
         featureElement.classList.add("animate-feature-in");
+        featureElement.addEventListener("transitionend", elementTransitionEnd);
     }
 
     // Else - if the feature (became) turned off:
-    // - no longer mark target as chosen
-    // - hide the feature-layer(s) in the #product-preview
-    // - find the existing featureElement in #selected ul
-    // - create FLIP-animation to animate featureElement to img in target
-    // - when animation is complete, remove featureElement from the DOM
-
-    if (features[feature]) {
-        // feature added
-        console.log(`Feature ${feature} is turned on!`);
-
-        // TODO: More code
-
-    } else {
+    else if (!features[feature]) {
         // feature removed
         console.log(`Feature ${feature} is turned off!`);
+        // - no longer mark target as chosen
+        target.classList.remove("chosen");
+        console.log("Remove chosen");
+        // - hide the feature-layer(s) in the #product-preview
+        const featureElements = document.querySelectorAll(`img[data-feature=${feature}]`);
 
-        // TODO: More code
-
+        featureElements.forEach((featureElement) => {
+            featureElement.classList.add("hide");
+        });
+        // - find the existing featureElement in #selected ul
+        const featureElement = document.querySelector(`#selected ul li[data-feature=${feature}]`);
+        // - create FLIP-animation to animate featureElement to img in target
+        featureElement.classList.remove("animate-feature-in");
+        featureElement.offsetHeight;
+        featureElement.classList.add("animate-feature-out");
+        // - when animation is complete, remove featureElement from the DOM
+        featureElement.addEventListener("transitionend", elementTransitionEnd);
     }
+}
+
+function elementTransitionEnd() {
+    this.remove();
 }
 
 // Create featureElement to be appended to #selected ul - could have used a <template> instead
