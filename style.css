@@ -80,14 +80,16 @@ body {
 
 #selected ul {
     list-style-type: none;
+    padding: 10px;
 }
 
 #selected ul li {
     display: inline-block;
+    margin-right: 10px;
 }
 
 #selected ul li img {
-    width: 3em;
+    width: 6em;
 }
 
 
@@ -109,7 +111,7 @@ body {
 
 .animate-feature-out {
     /* TODO: Create animation for removing a feature */
-    animation: animate-out 1.2s ease-in-out;
+    animation: animate-out 1.2s ease-in-out forwards;
 }
 
 @keyframes animate-out {

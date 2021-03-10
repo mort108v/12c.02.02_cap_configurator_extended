@@ -103,11 +103,11 @@ function toggleOption(event) {
         featureElement.offsetHeight;
         featureElement.classList.add("animate-feature-out");
         // - when animation is complete, remove featureElement from the DOM
-        featureElement.addEventListener("transitionend", elementTransitionEnd);
+        featureElement.addEventListener("animationend", elementAnimationEnd);
     }
 }
 
-function elementTransitionEnd() {
+function elementAnimationEnd() {
     this.remove();
 }
 
